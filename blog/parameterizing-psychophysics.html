@@ -43,15 +43,15 @@
 <h3 id="psychophysics">Psychophysics</h3>
 <p>Visual psychophysics began as a field of <a href="http://psiwebsubr.org/Fechner.pdf">study</a> long before computer vision. Psychophysics is the measurement of human perception as related to external stimuli. For example, a Two-Alternative Forced Choice task (<a href="https://en.wikipedia.org/wiki/Two-alternative_forced_choice">2AFC</a>) is a scenario in which a human subject is asked question that necessitates a yes/no answer, and they cannot answer anything else besides yes or no. This setup forces the reviewer to react according to their best judgements in an uncertain or novel scenario. While 100% confidence on questions may not be guranateed, confidence in each answer always remains present on a <em>variable, quantifiable level</em>. Because of this, the reviewer may take longer on harder questions and shorter on easier questions. This implicitly allows for the psychophysical annotation of problems, meaning we can use the <a href="https://www.wjscheirer.com/papers/wjs_tpami2014_perceptual.pdf">reaction time associated with a question as a parameter</a> for further use. Recently, we asked people on the popular Amazon <a href="https://www.mturk.com/">MTurk</a> platform a series of 2AFC annotation tasks. As seen in the figure below, we asked participants whether the figures where the same or not, and we recorded their
 accuracies and reaction times as psychophysical measurements against the stimulus tasks.</p>
-<img src="file:////Users/justindulay/programming/dulayjm.github.io/images/mturk.png" alt="Experiment" width="400"/>
+<img src="../images/mturk.png" alt="Experiment" width="400"/>
 <p>In the above case, they clearly remain the same; however, response accuracy can vary greatly with increasingly complex images. In other words, simple images remain easy for reviewers to quickly classify, while complex images show more variance in both reaction time and classification accuracy. The variance in questions is correlated to the complexity or noise from the HIT images. So far, this largely aligns with <a href="https://www.amazon.com/Psychophysics-Fundamentals-George-Gescheider/dp/080582281X">Signal Detection Theory</a>.</p>
-<img src="file:////Users/justindulay/programming/dulayjm.github.io/images/signal-noise.png" alt="Signal Detection Theory" width="400"/>
+<img src="../images/signal-noise.png" alt="Signal Detection Theory" width="400"/>
 <p>In our 2AFC case, the signal flips on and off all the time. However, the curve moves frequently to the left or right, dependent upon the complexity of the class. Complex images are both noisy and hard to classify correctly, while simple images are less noisy and easier to classify.</p>
 <h3 id="deep-learning">Deep Learning</h3>
 <p>After gathering the reaction times for paired images, we created a dataset that included paired images with associated reaction time penalties. Likwise, we also formulated a loss function the modifies cross entropy loss to include for psychophysical annotations.</p>
-<p><img src="file:////Users/justindulay/programming/dulayjm.github.io/images/psyphy_CE.png" alt="Loss Function"></p>
+<p><img src="../images/psyphy_CE.png" alt="Loss Function"></p>
 <p>where sigma is a scaling factor and z is the psychophysical penality incurred from reaction time:</p>
-<p><img src="file:////Users/justindulay/programming/dulayjm.github.io/images/max_loss.png" alt="Penalty"></p>
+<p><img src="../images/max_loss.png" alt="Penalty"></p>
 <p>In most cases, the maximum reaction time was around 30 seconds, and the minimum was around 1 second.</p>
 <p>While further experiments are being conducted, the code for parameterizing cross entropy loss remains straightforward.</p>
 <pre><code class="language-python"><div><span class="hljs-keyword">import</span> torch
